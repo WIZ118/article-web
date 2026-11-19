@@ -5,7 +5,7 @@ namespace App\Exceptions;
 use App\Laravel\Traits\ResponseGenerator;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Configuration\Exceptions;
-use Throwable;
+use PHPUnit\Event\Code\Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -17,6 +17,8 @@ class Handler extends ExceptionHandler
             if(in_array(strtolower($request->segment(1)), ["api","wh"]) == "api" OR $request->header('host') == env("API_URL","") ){
                 $api_response = true;
             }
+
+            // dd($exception); 
 
             switch(get_class($exception)){
                 case "libphonenumber\NumberParseException":
@@ -199,9 +201,9 @@ class Handler extends ExceptionHandler
 
 
 
-            // Add all other renderable/reportable logic from your old Handler render method here
+        // Add all other renderable/reportable logic from your old Handler render method here
         // For fallback or default, you can catch Throwable
     }
 
 }
-
+ 
