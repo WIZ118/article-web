@@ -3,10 +3,9 @@
 @section('content')
     <main class="flex-fill py-4 py-md-5">
         <div class="container" style="max-width: 1040px;">
-
             <div class="card shadow-sm mb-4">
                 <div class="card-body p-4">
-                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 ">
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2 mb-4">
                         <div>
                             <h1 class="h3 fw-bold text-dark mb-1">
                                 Welcome back, {{ auth('user')->user()->name ?? 'User' }}
@@ -14,12 +13,13 @@
                             <p class="text-secondary small mb-1">
                                 <span id="live-date-time">{{ now()->format('l, F j, Y • g:i:s A') }}</span>
                             </p>
-                            <p class="text-secondary small mb-0">Manage your public pages and review published Rtcl content.
+                            <p class="text-secondary small mb-0">
+                                Manage your public pages and review published Rtcl content.
                             </p>
                         </div>
                         <div>
                             <a href="{{ route('web.home') }}" target="_blank" class="btn btn-outline-dark btn-sm px-3">
-                                Open Live Website &#8599;
+                                Open Live Website ↗
                             </a>
                         </div>
                     </div>

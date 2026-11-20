@@ -5,6 +5,10 @@
     @include('portal._components.metas')
     @include('portal._components.styles')
     @yield('page-styles')
+    <link rel="icon" href="{{ asset('assets/images/RTCL.svg') }}?v=1">
+    <title>@yield('title', 'RTCL Portal')</title>
+
+
 </head>
 
 <body>

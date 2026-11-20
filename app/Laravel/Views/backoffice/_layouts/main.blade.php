@@ -5,6 +5,8 @@
     @include('backoffice._components.metas')
     @include('backoffice._components.styles')
     @yield('page-styles')
+    <link rel="icon" href="{{ asset('assets/images/RTCL.svg') }}?v=1">
+    <title>@yield('title', 'RTCL Backoffice')</title>
 </head>
 
 <body>

@@ -9,10 +9,11 @@ class UserAccountUpdateRequest extends RequestManager
     public function rules()
     {
         $id = $this->route('id');
+        auth('user')->id();
 
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:user,email,' . auth('admin')->id(),
+            'email' => 'required|email|unique:user,email,' . $id,
             'password' => 'nullable|string|min:8|confirmed',
         ];
     }
