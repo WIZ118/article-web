@@ -111,7 +111,7 @@
 @section('page-styles')
     <style>
         body {
-            background-color: seashell;
+            background-color: aliceblue;
         }
     </style>
 @endsection

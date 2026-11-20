@@ -11,11 +11,11 @@
                     <div class="card-body">
                         <label>Name:</label>
                         <p>
-                            {{ $record->full_name ?? '' }}
+                            {{ $record->name ?? '' }}
                         </p>
                         <label>Email:</label>
                         <p>
-                            {{ $record->email_address ?? '' }}
+                            {{ $record->email ?? '' }}
                         </p>
                     </div>
                 </div>

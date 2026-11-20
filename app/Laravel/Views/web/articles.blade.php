@@ -14,50 +14,23 @@
 
             <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
 
-                {{-- 1st article --}}
-
-                <div class="col">
-                    <div class="card h-100 text-start">
-                        <img src="{{asset('assets/images/article1.jpg')}}" class="card-img-top" alt="Article 1 thumbnail">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">Article 1</h5>
-                            <p class="card-text flex-grow-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                                congue enim sed tempor commodo. Vestibulum eros magna, semper id vehicula eget, feugiat in
-                                lorem.</p>
-                            <a href="{{ route('web.article') }}" class="btn btn-primary mt-auto">Go to article</a>
+                @forelse ($articles as $article)
+                    <div class="col">
+                        <div class="card article-card h-100 text-start">
+                            <img src="{{ asset($article['image']) }}" class="card-img-top article-card-image"
+                                alt="{{ $article['title'] }} thumbnail">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title article-card-title">{{ $article['title'] }}</h5>
+                                <p class="card-text article-card-summary flex-grow-1">{{ $article['summary'] }}</p>
+                                <a href="{{ route('web.article', $article['id']) }}" class="btn btn-primary mt-auto">Go to article</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                {{-- 2nd article --}}
-
-                <div class="col">
-                    <div class="card h-100 text-start">
-                        <img src="{{asset('assets/images/article2.jpg')}}" class="card-img-top" alt="Article 2 thumbnail">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">Article 2</h5>
-                            <p class="card-text flex-grow-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                                congue enim sed tempor commodo. Vestibulum eros magna, semper id vehicula eget, feugiat in
-                                lorem.</p>
-                            <a href="{{ route('web.article') }}" class="btn btn-primary mt-auto">Go to article</a>
-                        </div>
+                @empty
+                    <div class="col-12">
+                        <p class="text-secondary mb-0">No articles matched your search.</p>
                     </div>
-                </div>
-
-                {{-- 3rd article --}}
-
-                <div class="col">
-                    <div class="card h-100 text-start">
-                        <img src="{{asset('assets/images/article3.jpg')}}" class="card-img-top" alt="Article 3 thumbnail">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">Article 3</h5>
-                            <p class="card-text flex-grow-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-                                congue enim sed tempor commodo. Vestibulum eros magna, semper id vehicula eget, feugiat in
-                                lorem.</p>
-                            <a href="{{ route('web.article') }}" class="btn btn-primary mt-auto">Go to article</a>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </main>
@@ -67,6 +40,31 @@
     <style>
         body {
             background-color: ghostwhite;
+        }
+
+        .article-card {
+            min-height: 390px;
+        }
+
+        .article-card-image {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .article-card-title {
+            min-height: 24px;
+        }
+
+        .article-card-summary {
+            min-height: 72px;
+        }
+
+        @media (min-width: 768px) {
+            .article-card-image {
+                height: 210px;
+            }
         }
     </style>
 @endsection

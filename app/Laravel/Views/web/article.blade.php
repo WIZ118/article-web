@@ -11,21 +11,16 @@
             <div class="row align-items-start gy-4 mb-4">
 
                 <div class="col-md-5">
-                    <img src="{{ asset('assets/images/article1.jpg') }}" alt="Article Cover"
+                    <img src="{{ asset($article['image']) }}" alt="{{ $article['title'] }} Cover"
                         class="img-fluid rounded shadow-sm w-100" style="object-fit: cover;">
                 </div>
 
                 <div class="col-md-7">
                     <div class="article-content text-secondary" style="line-height: 1.8;">
-                        <p class="lead">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue enim sed tempor commodo.
-                            Vestibulum eros magna, semper id vehicula eget, feugiat in lorem. Fusce orci nunc, auctor
-                            rhoncus sollicitudin quis, molestie ac dui. Suspendisse pharetra mollis libero sed facilisis.
-                            Suspendisse semper, ante non dictum convallis, risus tellus blandit sapien, id mollis arcu metus
-                            nec leo.
-                        </p>
+                        <h1 class="h2 text-dark">{{ $article['title'] }}</h1>
+                        <p class="lead">{{ $article['content'] }}</p>
                         <p>
-                            Author: John Doe | Published on: {{ date('F j, Y', strtotime('2026-06-10')) }}
+                        Author: {{ $article['author'] }} | Published on: {{ date('F j, Y', strtotime($article['published_at'])) }}
                         </p>
                     </div>
                 </div>

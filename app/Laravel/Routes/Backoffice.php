@@ -15,9 +15,9 @@ Route::group([
 
     Route::group(['middleware' => "backoffice.auth"], function () {
         Route::get('/', ['as' => 'dashboard', 'uses' => 'MainController@index']);
-        Route::get('home', ['as' => 'home', 'uses' => 'MainController@home']);
-        Route::get('about', ['as' => 'about', 'uses' => 'MainController@about']);
-        Route::get('contact', ['as' => 'contact', 'uses' => 'MainController@contact']);
+        Route::get('profile', ['as' => 'profile.show', 'uses' => 'ProfileController@show']);
+        Route::get('profile/edit', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+        Route::post('profile/edit', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
         Route::post('logout', ['as' => 'logout', 'uses' => 'AuthenticationController@logout']);
 
         include_once app_path("Laravel/Routes/Backoffice/Backoffice.php");

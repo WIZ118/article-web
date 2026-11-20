@@ -45,7 +45,7 @@ class AuthenticationController extends Controller
 
         session()->flash('notification-status', "failed");
         session()->flash('notification-msg', "Invalid credentials. Please try again.");
-        return redirect()->back()->withInput($request->only('email_address'));
+        return redirect()->back()->withInput($request->only('email'));
     }
 
     public function register(PageRequest $request)

@@ -1,14 +1,21 @@
 <style>
+    :root {
+        --rtcl-primary: #0d6efd;
+        --rtcl-border: rgba(108, 117, 125, 0.18);
+        --rtcl-surface: rgba(255, 255, 255, 0.78);
+    }
+
     body {
-        background-color: blueviolet;
+        background-color: floralwhite;
+        color: #212529;
     }
 
-    p {
-        color: black;
+    .card {
+        background-color: var(--rtcl-surface);
+        border-color: var(--rtcl-border) !important;
+        border-radius: 0.75rem;
     }
-</style>
 
-<style>
     @media (min-width: 992px) {
         .position-lg-absolute {
             position: absolute !important;
@@ -18,25 +25,32 @@
             transform: translateX(-50%) !important;
         }
     }
-</style>
 
-<style>
     .active {
-        color: blueviolet !important;
+        color: var(--rtcl-primary) !important;
     }
 
     .nav-link,
-    .btn {
-        border-radius: 4px;
-        transition: background-color 0.3s ease, color 0.3s ease;
+    .btn,
+    .form-control,
+    .dropdown-menu {
+        border-radius: 0.5rem;
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
     .nav-link:hover {
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(13, 110, 253, 0.08);
     }
 
     .btn:hover {
-        color: black !important;
-        text-decoration: underline;
+        text-decoration: none;
+    }
+
+    @media (min-width: 992px) {
+        .rtcl-center-nav {
+            position: absolute !important;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
 </style>

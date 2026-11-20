@@ -3,37 +3,22 @@
 namespace App\Laravel\Controllers\Backoffice;
 
 use App\Laravel\Requests\PageRequest;
+use App\Laravel\Models\Admin;
+use App\Laravel\Models\Article;
+use App\Laravel\Models\User;
 
 class MainController extends Controller
 {
     public function __construct() {}
     public function index(PageRequest $request)
     {
-        $this->data['page_title'] = "Home Page";
-        return view('backoffice.home', $this->data);
-    }
-
-    public function about(PageRequest $request)
-    {
-        $this->data['page_title'] = "About Page";
-        return view('backoffice.about', $this->data);
-    }
-
-    public function article(PageRequest $request)
-    {
-        $this->data['page_title'] = "Article Page";
-        return view('backoffice.article', $this->data);
-    }
-
-    public function articles(PageRequest $request)
-    {
-        $this->data['page_title'] = "Articles Page";
-        return view('backoffice.articles', $this->data);
-    }
-
-    public function contact(PageRequest $request)
-    {
-        $this->data['page_title'] = "Contact Page";
-        return view('backoffice.contact', $this->data);
+        $this->data['page_title'] = "Dashboard";
+        $this->data['stats'] = [
+            'admin_accounts' => Admin::count(),
+            'user_accounts' => User::count(),
+            'published_articles' => Article::count(),
+            'site_status' => 'Live',
+        ];
+        return view('backoffice.dashboard', $this->data);
     }
 }

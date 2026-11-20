@@ -1,42 +1,52 @@
 <style>
+    :root {
+        --rtcl-primary: #0d6efd;
+        --rtcl-border: rgba(108, 117, 125, 0.18);
+        --rtcl-surface: rgba(255, 255, 255, 0.78);
+    }
+
     body {
-        background-color: blueviolet;
+        background-color: aliceblue;
+        color: #212529;
     }
 
-    p {
-        color: black;
+    .card {
+        background-color: var(--rtcl-surface);
+        border-color: var(--rtcl-border) !important;
+        border-radius: 0.75rem;
     }
-</style>
 
-<style>
-    @media (min-width: 992px) {
-        .position-lg-absolute {
-            position: absolute !important;
-        }
-
-        .translate-middle-x-lg {
-            transform: translateX(-50%) !important;
-        }
-    }
-</style>
-
-<style>
     .active {
-        color: blueviolet !important;
+        color: var(--rtcl-primary) !important;
     }
 
     .nav-link,
-    .btn {
-        border-radius: 4px;
-        transition: background-color 0.3s ease, color 0.3s ease;
+    .btn,
+    .form-control {
+        border-radius: 0.5rem;
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
     .nav-link:hover {
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgba(13, 110, 253, 0.08);
     }
 
     .btn:hover {
-        color: black !important;
-        text-decoration: underline;
+        text-decoration: none;
+    }
+
+    @media (min-width: 768px) {
+        #portal-sidebar {
+            width: 260px;
+            min-width: 260px;
+            max-width: 260px;
+            flex-shrink: 0;
+        }
+
+        body.sidebar-collapsed #portal-sidebar {
+            width: 72px;
+            min-width: 72px;
+            max-width: 72px;
+        }
     }
 </style>

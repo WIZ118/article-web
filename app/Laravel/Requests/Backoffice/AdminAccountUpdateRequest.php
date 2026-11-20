@@ -3,27 +3,26 @@
 namespace App\Laravel\Requests\Backoffice;
 
 use App\Laravel\Requests\RequestManager;
-use Override;
 
 class AdminAccountUpdateRequest extends RequestManager
 {
     public function rules()
     {
-        $rules = [
-            'full_name' => 'nullable|string|max:255',
-            'email' => "nullable|email|unique:admin,email",
-            'password' => 'nullable|string|min:8|confirmed',
-        ];
+        $id = $this->route('id') ?: auth('admin')->id();
 
-        return $rules;
+        return [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admin,email,' . $id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Name is optional.',
-            'name.unique' => 'This name is already registered.',
-            'email.required' => 'Email address is optional.',
+            'name.required' => 'Name is required.',
+            'email.required' => 'Email address is required.',
             'email.email' => 'Please provide a valid email address.',
             'email.unique' => 'This email is already registered.',
             'password.required' => 'Password is optional.',

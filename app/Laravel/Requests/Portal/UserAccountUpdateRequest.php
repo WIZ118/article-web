@@ -3,16 +3,15 @@
 namespace App\Laravel\Requests\Portal;
 
 use App\Laravel\Requests\RequestManager;
-use Override;
-
 class UserAccountUpdateRequest extends RequestManager
 {
     public function rules()
     {
         $rules = [
-            'full_name' => 'nullable|string|max:255',
-            'email_address' => "nullable|email|unique:admin,email_address",
-            'user_password' => 'nullable|string|min:8|confirmed',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:user,email,' . auth('user')->id(),
+            'password' => 'nullable|string|min:8|confirmed',
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
 
         return $rules;
@@ -21,14 +20,12 @@ class UserAccountUpdateRequest extends RequestManager
     public function messages()
     {
         return [
-            'full_name.required' => 'Name is optional.',
-            'full_name.unique' => 'This name is already registered.',
-            'email_address.required' => 'Email address is optional.',
-            'email_address.email' => 'Please provide a valid email address.',
-            'email_address.unique' => 'This email is already registered.',
-            'user_password.required' => 'Password is optional.',
-            'user_password.min' => 'Password must be at least 8 characters long.',
-            'user_password.confirmed' => 'Password does not match.',
+            'name.required' => 'Name is required.',
+            'email.required' => 'Email address is required.',
+            'email.email' => 'Please provide a valid email address.',
+            'email.unique' => 'This email is already registered.',
+            'password.min' => 'Password must be at least 8 characters long.',
+            'password.confirmed' => 'Password does not match.',
         ];
     }
 }

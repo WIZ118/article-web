@@ -58,7 +58,7 @@
 @section('page-styles')
     <style>
         body {
-            background-color: lavenderblush;
+            background-color: aliceblue;
         }
     </style>
 @endsection

@@ -24,73 +24,19 @@
                 </div>
 
 
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="card h-100 text-start">
-                        <a href="{{ route('web.article') }}">
-                            <img src="{{ asset('assets/images/article1.jpg') }}" class="card-img-top" alt="article 1"
-                                class="img-fluid">
-                        </a>
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">Article 1</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue enim
-                                sed tempor commodo.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-body-secondary">Uploaded 3 mins ago</small>
+                @foreach ($articles as $article)
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="card h-100 text-start">
+                            <a href="{{ route('web.article', $article['id']) }}">
+                                <img src="{{ asset($article['image']) }}" class="card-img-top" alt="{{ $article['title'] }}" class="img-fluid">
+                            </a>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ $article['title'] }}</h5>
+                                <p class="card-text">{{ $article['summary'] }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="card h-100 text-start">
-                        <a href="{{ route('web.article') }}">
-                            <img src="{{ asset('assets/images/article2.jpg') }}" class="card-img-top" alt="article 2"
-                                class="img-fluid">
-                        </a>
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">Article 2</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue enim
-                                sed tempor commodo.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-body-secondary">Uploaded 4 mins ago</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="card h-100 text-start">
-                        <a href="{{ route('web.article') }}">
-                            <img src="{{ asset('assets/images/article3.jpg') }}" class="card-img-top" alt="article 3"
-                                class="img-fluid">
-                        </a>
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">Article 3</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue enim
-                                sed tempor commodo.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-body-secondary">Uploaded 6 mins ago</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="card h-100 text-start">
-                        <a href="{{ route('web.article') }}">
-                            <img src="{{ asset('assets/images/article5.jpg') }}" class="card-img-top" alt="article 5"
-                                class="img-fluid">
-                        </a>
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">Article 5</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue enim
-                                sed tempor commodo.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-body-secondary">Uploaded 7 mins ago</small>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
         </div>

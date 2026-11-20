@@ -8,7 +8,7 @@
                     <img src="{{ asset('assets/images/RTCL.svg') }}" alt="Rtcl Logo" height="64" class="me-2">
                     <span class="display-6 fw-bold text-primary">Rtcl</span>
                 </a>
-                <p class="lead text-secondary fs-6 mb-0">Sign in to access the Rtcl Backoffice Portal</p>
+                <p class="lead text-secondary fs-6 mb-0">Sign in to access the Rtcl User Portal</p>
             </div>
 
             <div class="card shadow-sm">

@@ -18,7 +18,7 @@
                         <div class="mb-3">
                             <label for="name" class="form-label fw-bold text-secondary">Full Name</label>
                             <input type="text" class="form-control" id="full-name" name="name" placeholder="Juan Dela Cruz"
-                                value="{{ old('full-name') }}" required>
+                                value="{{ old('name') }}" required>
                             @if ($errors->first('name'))
                                 <div class="text-left">
                                     <small class="text-danger">

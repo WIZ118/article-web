@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     @include('portal._components.metas')
     @include('portal._components.styles')
     @yield('page-styles')
 </head>
+
 <body>
     <div class="d-flex flex-column flex-md-row min-vh-100">
-        @include('portal._components.sidebar')
+        @auth('user')
+            @include('portal._components.sidebar')
+        @endauth
         <div class="flex-fill d-flex flex-column">
             <div class="container flex-fill d-flex flex-column">
                 <div class="row flex-fill">
@@ -42,4 +46,5 @@
     </script>
     @yield('page-scripts')
 </body>
+
 </html>

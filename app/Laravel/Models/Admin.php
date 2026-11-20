@@ -26,14 +26,10 @@ class Admin extends Authenticatable implements JWTSubject
     protected $table = "admin";
     protected $fillable = [
         'name',
-        'address',
+        'email',
         'password',
+        'profile_photo_path',
     ];
-
-    public function getAuthPassword()
-    {
-        return $this->user_password;
-    }
 
     /**
      * The attributes that should be hidden for serialization.

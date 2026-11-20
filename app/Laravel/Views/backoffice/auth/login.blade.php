@@ -95,7 +95,7 @@
 @section('page-styles')
     <style>
         body {
-            background-color: honeydew;
+            background-color: lavenderblush;
         }
     </style>
 @endsection
