@@ -6,7 +6,7 @@
     @include('web._components.styles')
     @yield('page-styles')
     <link rel="icon" href="{{ asset('assets/images/RTCL.svg') }}?v=1">
-    <title>@yield('title', 'RTCL Web')</title>
+    <title>@yield('title', 'Web')</title>
 
 </head>
 
