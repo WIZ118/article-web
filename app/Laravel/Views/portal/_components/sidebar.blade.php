@@ -9,15 +9,6 @@
                 <span class="fs-4 fw-bold ms-2 sidebar-text">Rtcl</span>
             </a>
 
-            {{-- <button type="button" id="sidebar-toggle-btn"
-                class="btn btn-light border btn-sm d-none d-md-inline-flex align-items-center justify-content-center flex-shrink-0"
-                title="Toggle Sidebar" aria-label="Toggle Sidebar" style="width: 34px; height: 34px;">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-                </svg>
-            </button> --}}
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#portal-sidebar-menu"
                 aria-controls="portal-sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -49,8 +40,8 @@
 
                 <li class="nav-item">
                     <a href="{{ route('portal.cms.home') }}" title="Home Page"
-                        class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('portal.cms.home') ? 'active fw-semibold' : 'text-dark' }}"
-                        @if(request()->routeIs('portal.cms.home'))
+                        class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('portal.cms.home*') ? 'active fw-semibold' : 'text-dark' }}"
+                        @if(request()->routeIs('portal.cms.home*'))
                         style="background-color: #0d6efd; color: #ffffff !important;" @endif>
                         <svg class="flex-shrink-0" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
                             <path
@@ -62,8 +53,8 @@
 
                 <li class="nav-item">
                     <a href="{{ route('portal.cms.about') }}" title="About Us"
-                        class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('portal.cms.about') ? 'active fw-semibold' : 'text-dark' }}"
-                        @if(request()->routeIs('portal.cms.about'))
+                        class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('portal.cms.about*') ? 'active fw-semibold' : 'text-dark' }}"
+                        @if(request()->routeIs('portal.cms.about*'))
                         style="background-color: #0d6efd; color: #ffffff !important;" @endif>
                         <svg class="flex-shrink-0" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
@@ -76,8 +67,8 @@
 
                 <li class="nav-item">
                     <a href="{{ route('portal.cms.contact') }}" title="Contact Us"
-                        class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('portal.cms.contact') ? 'active fw-semibold' : 'text-dark' }}"
-                        @if(request()->routeIs('portal.cms.contact'))
+                        class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('portal.cms.contact*') ? 'active fw-semibold' : 'text-dark' }}"
+                        @if(request()->routeIs('portal.cms.contact*'))
                         style="background-color: #0d6efd; color: #ffffff !important;" @endif>
                         <svg class="flex-shrink-0" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
                             <path
@@ -87,16 +78,24 @@
                     </a>
                 </li>
 
+                <li class="nav-header text-uppercase text-muted fw-bold small mt-3 mb-1 px-3 sidebar-text"
+                    style="font-size: 0.72rem; letter-spacing: 0.05em;">
+                    Account
+                </li>
+
                 <li class="nav-item">
                     <a href="{{ route('portal.profile.show') }}" title="Profile"
                         class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('portal.profile.*') ? 'active fw-semibold' : 'text-dark' }}"
                         @if(request()->routeIs('portal.profile.*'))
                         style="background-color: #0d6efd; color: #ffffff !important;" @endif>
+                        <svg class="flex-shrink-0" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                            <path fill-rule="evenodd"
+                                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                        </svg>
                         <span class="sidebar-text">Profile</span>
                     </a>
                 </li>
-
-
             </ul>
 
             <hr class="text-secondary opacity-25 w-100 my-3">

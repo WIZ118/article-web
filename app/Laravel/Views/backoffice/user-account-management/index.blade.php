@@ -1,12 +1,15 @@
 @extends('backoffice._layouts.main')
 
 @section('content')
+    @php
+        $totalRecords = method_exists($records, 'total') ? $records->total() : $records->count();
+    @endphp
     <div class="container py-4 py-md-5">
         <div class="mb-4">
             <div class="d-flex align-items-center gap-2">
                 <h3 class="mb-0 fw-bold text-dark">User Account Management</h3>
                 <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle">
-                    {{ $records->count() }} {{ Str::plural('User', $records->count()) }}
+                    {{ $totalRecords }} {{ Str::plural('User', $totalRecords) }}
                 </span>
             </div>
             <p class="text-muted small mb-0 mt-1">Manage portal user accounts, credentials, and profile details.</p>
@@ -29,7 +32,7 @@
                     </div>
                     <div class="col-12 col-md-auto text-muted small">
                         Showing <span id="userVisibleCount" class="fw-semibold text-dark">{{ $records->count() }}</span> of
-                        {{ $records->count() }} records
+                        {{ $totalRecords }} records
                     </div>
                 </div>
             </div>
@@ -47,7 +50,9 @@
                     <tbody>
                         @forelse ($records as $index => $record)
                             <tr class="searchable-record" data-search="{{ strtolower($record->name . ' ' . $record->email) }}">
-                                <td class="ps-4 text-muted small">{{ $loop->iteration }}</td>
+                                <td class="ps-4 text-muted small">
+                                    {{ method_exists($records, 'firstItem') && $records->firstItem() ? $records->firstItem() + $loop->index : $loop->iteration }}
+                                </td>
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
                                         <div class="rounded-circle bg-success-subtle text-success fw-bold d-flex align-items-center justify-content-center flex-shrink-0"
@@ -147,7 +152,7 @@
 
             @if (method_exists($records, 'links') && $records->hasPages())
                 <div class="card-footer bg-white py-3">
-                    {{ $records->links() }}
+                    {{ $records->links('pagination::bootstrap-5') }}
                 </div>
             @endif
         </div>

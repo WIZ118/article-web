@@ -22,7 +22,6 @@ class AuthenticationController extends Controller
     public function logout(PageRequest $request)
     {
         Auth('admin')->logout();
-        $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         session()->flash('notification-status', "success");

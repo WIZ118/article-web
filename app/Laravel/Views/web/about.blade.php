@@ -9,15 +9,15 @@
                 </div>
 
                 <div class="col-md-6 text-center text-md-start order-md-2">
+                    <p class="text-uppercase text-primary fw-semibold small mb-1" style="letter-spacing: 0.05em;">Who We Are
+                    </p>
                     <h1 class="display-4 fw-bold mb-3 text-dark">About Rtcl</h1>
                     <p class="lead text-secondary mb-4">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue enim sed tempor commodo.
-                        Vestibulum eros magna, semper id vehicula eget, feugiat in lorem. Fusce orci nunc, auctor rhoncus
-                        sollicitudin quis, molestie ac dui. Suspendisse pharetra mollis libero sed facilisis. Suspendisse
-                        semper, ante non dictum convallis, risus tellus blandit sapien, id mollis arcu metus nec leo.
+                        Rtcl is a modern web publishing and article management platform designed to streamline content
+                        creation, editorial organization, and reader engagement across a unified portal experience.
                     </p>
                     <div>
-                        <a href="{{ route('web.contact') }}" class="btn btn-primary btn-lg">
+                        <a href="{{ route('web.contact') }}" class="btn btn-primary btn-lg px-4 shadow-sm">
                             Contact us
                         </a>
                     </div>
@@ -26,24 +26,24 @@
 
             <div class="row g-4">
                 <div class="col-md-6">
-                    <div class="card h-100 shadow-sm text-start">
+                    <div class="card h-100 border-0 shadow-sm text-start">
                         <div class="card-body p-4 d-flex flex-column">
                             <h3 class="card-title fw-bold text-dark mb-3">Our Mission</h3>
                             <p class="card-text text-secondary flex-grow-1 mb-0">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue enim sed tempor
-                                commodo. Vestibulum eros magna, semper id vehicula eget, feugiat in lorem.
+                                To empower writers, editors, and administrators with an intuitive, structured workspace
+                                that makes publishing clear, reliable, and accessible to every reader.
                             </p>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-6">
-                    <div class="card h-100 shadow-sm text-start">
+                    <div class="card h-100 border-0 shadow-sm text-start">
                         <div class="card-body p-4 d-flex flex-column">
                             <h3 class="card-title fw-bold text-dark mb-3">Our Vision</h3>
                             <p class="card-text text-secondary flex-grow-1 mb-0">
-                                Suspendisse pharetra mollis libero sed facilisis. Suspendisse semper, ante non dictum
-                                convallis, risus tellus blandit sapien, id mollis arcu metus nec leo.
+                                To serve as a trusted digital hub where well-organized articles and seamless content
+                                governance foster continuous learning and informed communities.
                             </p>
                         </div>
                     </div>
