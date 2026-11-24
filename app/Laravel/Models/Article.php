@@ -1,10 +1,13 @@
-<?php namespace App\Laravel\Models;
+<?php
+
+namespace App\Laravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class Article extends Model{
+class Article extends Model
+{
     use SoftDeletes;
     /**
      * Enable soft delete in table
@@ -40,13 +43,13 @@ class Article extends Model{
      */
     protected $appends = [];
 
-    public function getDirectoryAttribute($value){
-        return str_replace(env("AWS_S3_URL"),env("AWS_S3_CDN"),$value);
+    public function getDirectoryAttribute($value)
+    {
+        return str_replace(env("AWS_S3_URL"), env("AWS_S3_CDN"), $value);
     }
 
-    public function user(){
-        return $this->belongsTo('App\Laravel\Models\User', 'user_id','id');
+    public function user()
+    {
+        return $this->belongsTo('App\Laravel\Models\User', 'user_id', 'id');
     }
-
-
 }

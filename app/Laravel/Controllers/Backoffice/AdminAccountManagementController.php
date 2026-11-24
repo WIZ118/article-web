@@ -7,7 +7,7 @@ use App\Laravel\Models\Admin;
 use Illuminate\Support\Facades\DB;
 use App\Laravel\Requests\Backoffice\AdminAccountUpdateRequest;
 
-class AccountManagementController extends Controller
+class AdminAccountManagementController extends Controller
 {
     public function __construct()
     {

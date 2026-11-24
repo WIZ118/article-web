@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Admin extends Authenticatable implements JWTSubject
 {
@@ -16,6 +17,8 @@ class Admin extends Authenticatable implements JWTSubject
     use HasFactory;
 
     use Notifiable;
+
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -29,7 +32,9 @@ class Admin extends Authenticatable implements JWTSubject
         'email',
         'password',
         'profile_photo_path',
+
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.

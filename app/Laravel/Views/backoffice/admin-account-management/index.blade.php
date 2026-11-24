@@ -86,8 +86,7 @@
                                             <span>Edit</span>
                                         </a>
                                         <form action="{{ route('backoffice.admin_account_management.delete', $record->id) }}"
-                                            method="POST" class="d-inline m-0"
-                                            onsubmit="return confirm('Delete this admin account?');">
+                                            method="POST" class="d-inline m-0 delete-form" data-name="{{ $record->name }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
@@ -136,7 +135,7 @@
                             <a href="{{ route('backoffice.admin_account_management.edit', $record->id) }}"
                                 class="btn btn-sm btn-outline-primary flex-fill">Edit</a>
                             <form action="{{ route('backoffice.admin_account_management.delete', $record->id) }}" method="POST"
-                                class="flex-fill m-0" onsubmit="return confirm('Delete this admin account?');">
+                                class="flex-fill m-0 delete-form" data-name="{{ $record->name }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger w-100">Delete</button>
@@ -160,6 +159,7 @@
 @endsection
 
 @section('page-scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const searchInput = document.getElementById('adminTableSearch');
@@ -188,6 +188,27 @@
                     }
                 });
             }
+
+            document.querySelectorAll('.delete-form').forEach(form => {
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    const accountName = this.dataset.name || 'this admin account';
+
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: `Do you want to delete ${accountName}? This action cannot be undone.`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Yes, delete!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.submit();
+                        }
+                    });
+                });
+            });
         });
     </script>
 @endsection
