@@ -11,11 +11,15 @@
                 <div class="col-md-6 text-center text-md-start order-md-2">
                     <p class="text-uppercase text-primary fw-semibold small mb-1" style="letter-spacing: 0.05em;">Who We Are
                     </p>
-                    <h1 class="display-4 fw-bold mb-3 text-dark">About Rtcl</h1>
-                    <p class="lead text-secondary mb-4">
-                        Rtcl is a modern web publishing and article management platform designed to streamline content
-                        creation, editorial organization, and reader engagement across a unified portal experience.
-                    </p>
+                    <h1 class="display-4 fw-bold mb-3 text-dark">{{ $about->title ?? 'About Rtcl' }}</h1>
+                    @if (!empty($about?->content))
+                        <div class="lead text-secondary mb-4">{!! $about->content !!}</div>
+                    @else
+                        <p class="lead text-secondary mb-4">
+                            Rtcl is a modern web publishing and article management platform designed to streamline content
+                            creation, editorial organization, and reader engagement across a unified portal experience.
+                        </p>
+                    @endif
                     <div>
                         <a href="{{ route('web.contact') }}" class="btn btn-primary btn-lg px-4 shadow-sm">
                             Contact us

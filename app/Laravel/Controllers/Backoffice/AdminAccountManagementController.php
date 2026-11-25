@@ -6,6 +6,7 @@ use App\Laravel\Requests\PageRequest;
 use App\Laravel\Models\Admin;
 use Illuminate\Support\Facades\DB;
 use App\Laravel\Requests\Backoffice\AdminAccountUpdateRequest;
+use App\Laravel\Requests\Backoffice\AdminAccountPasswordRequest;
 
 class AdminAccountManagementController extends Controller
 {
@@ -33,14 +34,9 @@ class AdminAccountManagementController extends Controller
         DB::beginTransaction();
 
         try {
-            $user = Admin::find($id);
+            $user = Admin::findOrFail($id);
             $user->name = strtoupper($request->input('name'));
             $user->email = strtolower($request->input('email'));
-
-            if ($request->filled('password')) {
-                $user->password = bcrypt($request->input('password'));
-            }
-
             $user->save();
 
             DB::commit();
@@ -48,6 +44,35 @@ class AdminAccountManagementController extends Controller
             session()->flash('notification-status', "success");
             session()->flash('notification-msg', "Successfully updated.");
             return redirect()->route('backoffice.admin_account_management.index');
+        } catch (\Exception $e) {
+            DB::rollback();
+            session()->flash('notification-status', "failed");
+            session()->flash('notification-msg', "Server failed. Please try again later.");
+            return redirect()->back();
+        }
+    }
+
+    public function password(PageRequest $request, $id = null)
+    {
+        $this->data['record'] = Admin::findOrFail($id);
+
+        return view('backoffice.admin-account-management.password', $this->data);
+    }
+
+    public function updatePassword(AdminAccountPasswordRequest $request, $id = null)
+    {
+        DB::beginTransaction();
+
+        try {
+            $user = Admin::findOrFail($id);
+            $user->password = bcrypt($request->input('password'));
+            $user->save();
+
+            DB::commit();
+
+            session()->flash('notification-status', "success");
+            session()->flash('notification-msg', "Admin password successfully updated.");
+            return redirect()->route('backoffice.admin_account_management.edit', $user->id);
         } catch (\Exception $e) {
             DB::rollback();
             session()->flash('notification-status', "failed");

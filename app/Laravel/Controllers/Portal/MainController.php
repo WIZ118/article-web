@@ -8,6 +8,7 @@ use App\Laravel\Models\Article;
 class MainController extends Controller
 {
     public function __construct() {}
+
     public function index(PageRequest $request)
     {
         $this->data['page_title'] = "Dashboard";
@@ -23,12 +24,6 @@ class MainController extends Controller
         ];
         $this->data['recent_articles'] = [];
         return view('portal.dashboard', $this->data);
-    }
-
-    public function cmsHome(PageRequest $request)
-    {
-        $this->data['page_title'] = "Home Page";
-        return view('portal.cms.home', $this->data);
     }
 
     public function cmsAbout(PageRequest $request)

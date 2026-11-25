@@ -6,6 +6,8 @@ Route::group(['prefix' => 'user-account-management', 'as' => 'user_account_manag
     Route::get('/', ['as' => 'index', 'uses' => 'UserAccountManagementController@index']);
     Route::get('edit/{id}', ['as' => 'edit', 'uses' => 'UserAccountManagementController@edit']);
     Route::post('edit/{id}', ['as' => 'update', 'uses' => 'UserAccountManagementController@update']);
+    Route::get('password/{id}', ['as' => 'password', 'uses' => 'UserAccountManagementController@password']);
+    Route::post('password/{id}', ['as' => 'update_password', 'uses' => 'UserAccountManagementController@updatePassword']);
     Route::get('show/{id}', ['as' => 'show', 'uses' => 'UserAccountManagementController@show']);
     Route::delete('delete/{id}', ['as' => 'delete', 'uses' => 'UserAccountManagementController@delete']);
 });

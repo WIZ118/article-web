@@ -8,11 +8,11 @@ class AdminAccountUpdateRequest extends RequestManager
 {
     public function rules()
     {
+        $id = $this->route('id') ?: auth('admin')->id();
 
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:admin,email,' . auth('user')->id(),
-            'password' => 'nullable|string|min:8|confirmed',
+            'email' => 'required|email|unique:admin,email,' . $id,
             'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
@@ -24,9 +24,6 @@ class AdminAccountUpdateRequest extends RequestManager
             'email.required' => 'Email address is required.',
             'email.email' => 'Please provide a valid email address.',
             'email.unique' => 'This email is already registered.',
-            'password.required' => 'Password is optional.',
-            'password.min' => 'Password must be at least 8 characters long.',
-            'password.confirmed' => 'Password does not match.',
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Laravel\Controllers\Web;
 
 use App\Laravel\Requests\PageRequest;
+use App\Laravel\Models\CMS;
 
 class MainController extends Controller
 {
@@ -69,13 +70,21 @@ class MainController extends Controller
     public function index(PageRequest $request)
     {
         $this->data['page_title'] = "Home Page";
+        $this->data['home'] = CMS::home();
         return view('web.home', $this->data);
     }
 
     public function about(PageRequest $request)
     {
         $this->data['page_title'] = "About Page";
+        $this->data['about'] = CMS::about();
         return view('web.about', $this->data);
+    }
+    public function contact(PageRequest $request)
+    {
+        $this->data['page_title'] = "Contact Page";
+        $this->data['contact'] = CMS::contact();
+        return view('web.contact', $this->data);
     }
 
     public function article(PageRequest $request, $id = null)
@@ -107,11 +116,4 @@ class MainController extends Controller
         $this->data['search'] = $search;
         return view('web.articles', $this->data);
     }
-
-    public function contact(PageRequest $request)
-    {
-        $this->data['page_title'] = "Contact Page";
-        return view('web.contact', $this->data);
-    }
-
 }

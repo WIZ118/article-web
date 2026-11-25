@@ -9,7 +9,7 @@
                         Admin Account Management
                     </p>
                     <h1 class="h3 fw-bold text-dark mb-1">Edit Admin Account</h1>
-                    <p class="text-secondary mb-0">Update administrator details or set a new password.</p>
+                    <p class="text-secondary mb-0">Update administrator details or manage account credentials.</p>
                 </div>
 
                 <a href="{{ route('backoffice.admin_account_management.index') }}"
@@ -23,15 +23,27 @@
             </div>
 
             <div class="card shadow-sm border-0 overflow-hidden">
-                <div class="card-header bg-white py-3 px-4 border-bottom d-flex align-items-center gap-3">
-                    <div class="rounded-circle bg-primary-subtle text-primary fw-bold d-flex align-items-center justify-content-center flex-shrink-0"
-                        style="width: 42px; height: 42px;">
-                        {{ strtoupper(substr($record->name ?? 'A', 0, 1)) }}
+                <div
+                    class="card-header bg-white py-3 px-4 border-bottom d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
+                    <div class="d-flex align-items-center gap-3 min-w-0">
+                        <div class="rounded-circle bg-primary-subtle text-primary fw-bold d-flex align-items-center justify-content-center flex-shrink-0"
+                            style="width: 42px; height: 42px;">
+                            {{ strtoupper(substr($record->name ?? 'A', 0, 1)) }}
+                        </div>
+                        <div class="min-w-0">
+                            <div class="fw-bold text-dark text-truncate">{{ $record->name }}</div>
+                            <div class="text-muted small text-truncate">{{ $record->email }}</div>
+                        </div>
                     </div>
-                    <div class="min-w-0">
-                        <div class="fw-bold text-dark text-truncate">{{ $record->name }}</div>
-                        <div class="text-muted small text-truncate">{{ $record->email }}</div>
-                    </div>
+
+                    <a href="{{ route('backoffice.admin_account_management.password', $record->id) }}"
+                        class="btn btn-sm btn-outline-warning d-inline-flex align-items-center justify-content-center gap-1 flex-shrink-0">
+                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2" />
+                        </svg>
+                        <span>Change Password</span>
+                    </a>
                 </div>
 
                 <form action="{{ route('backoffice.admin_account_management.update', $record->id) }}" method="POST">
@@ -60,36 +72,6 @@
                                 @endif
                             </div>
                         </div>
-
-                        <hr class="my-4">
-
-                        <div class="mb-3">
-                            <h6 class="fw-bold text-dark mb-1">Change Password</h6>
-                            <p class="text-muted small mb-0">Leave both fields blank if you do not want to change the
-                                current password.</p>
-                        </div>
-
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="password" class="form-label fw-semibold text-secondary small text-uppercase">
-                                    New Password
-                                </label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    id="password" name="password" placeholder="Enter new password">
-                                @if ($errors->first('password'))
-                                    <div class="text-danger small mt-1">{{ $errors->first('password') }}</div>
-                                @endif
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="password_confirmation"
-                                    class="form-label submit-btn fw-semibold text-secondary small text-uppercase">
-                                    Confirm Password
-                                </label>
-                                <input type="password" class="form-control" id="password_confirmation"
-                                    name="password_confirmation" placeholder="Repeat new password">
-                            </div>
-                        </div>
                     </div>
 
                     <div
@@ -97,7 +79,7 @@
                         <a href="{{ route('backoffice.admin_account_management.index') }}"
                             class="btn btn-outline-secondary">Cancel</a>
                         <button type="submit"
-                            class="btn btn-primary d-inline-flex align-items-center justify-content-center gap-2 px-4">
+                            class="btn submit-btn btn-primary d-inline-flex align-items-center justify-content-center gap-2 px-4">
                             <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16">
                                 <path
                                     d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
