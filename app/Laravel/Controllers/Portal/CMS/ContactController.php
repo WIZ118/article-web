@@ -4,9 +4,12 @@ namespace App\Laravel\Controllers\Portal\CMS;
 
 use App\Laravel\Controllers\Portal\Controller;
 use App\Laravel\Requests\PageRequest;
-use App\Laravel\Requests\Portal\CMS\CMSContactRequest;
+use App\Laravel\Requests\Portal\CMS\ContactRequest;
 use App\Laravel\Models\CMS;
+use App\Laravel\Models\CMSContact;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
@@ -15,17 +18,18 @@ class ContactController extends Controller
     public function index(PageRequest $request)
     {
         $this->data['page_title'] = "Contact Page";
-        $this->data['record'] = CMS::contact();
+        $this->data['record'] = CMS::contact(Auth::guard('user')->id());
         return view('portal.cms.contact', $this->data);
     }
 
-    public function update(CMSContactRequest $request)
+    public function update(ContactRequest $request)
     {
         DB::beginTransaction();
 
         try {
-            $contact = CMS::contact() ?? CMS::forTable('cms_contact');
-            $contact->setTable('cms_contact');
+            $userId = Auth::guard('user')->id();
+            $contact = CMS::contact($userId) ?? new CMSContact();
+            $contact->user_id = $userId;
             $contact->title = $request->input('title');
             $contact->content = $request->input('content');
             $contact->save();
@@ -37,6 +41,7 @@ class ContactController extends Controller
             return redirect()->route('portal.cms.contact');
         } catch (\Exception $e) {
             DB::rollback();
+            Log::error('Failed to update user contact page content.', ['exception' => $e]);
 
             session()->flash('notification-status', "failed");
             session()->flash('notification-msg', "Server failed. Please try again later.");

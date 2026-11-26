@@ -2,8 +2,10 @@
 
 namespace App\Laravel\Controllers\Web;
 
-use App\Laravel\Requests\PageRequest;
+use App\Laravel\Models\Article;
 use App\Laravel\Models\CMS;
+use App\Laravel\Requests\PageRequest;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -69,30 +71,51 @@ class MainController extends Controller
 
     public function index(PageRequest $request)
     {
-        $this->data['page_title'] = "Home Page";
-        $this->data['home'] = CMS::home();
+        $this->data['page_title'] = 'Home Page';
+        $this->data['home'] = CMS::home(Auth::guard('user')->id());
+        $this->data['articles'] = $this->visibleArticles();
+
         return view('web.home', $this->data);
     }
 
     public function about(PageRequest $request)
     {
-        $this->data['page_title'] = "About Page";
-        $this->data['about'] = CMS::about();
+        $this->data['page_title'] = 'About Page';
+        $this->data['about'] = CMS::about(Auth::guard('user')->id());
+
         return view('web.about', $this->data);
     }
+
     public function contact(PageRequest $request)
     {
-        $this->data['page_title'] = "Contact Page";
-        $this->data['contact'] = CMS::contact();
+        $this->data['page_title'] = 'Contact Page';
+        $this->data['contact'] = CMS::contact(Auth::guard('user')->id());
+
         return view('web.contact', $this->data);
     }
 
     public function article(PageRequest $request, $id = null)
     {
-        $this->data['page_title'] = "Article Page";
-        $this->data['article'] = collect($this->data['articles'])->firstWhere('id', (int) $id);
+        $this->data['page_title'] = 'Article Page';
 
-        if (!$this->data['article']) {
+        if (preg_match('/^user-(\d+)$/D', (string) $id, $matches) === 1) {
+            $user = Auth::guard('user')->user();
+            $article = $user
+                ? Article::where('user_id', $user->id)->whereKey((int) $matches[1])->first()
+                : null;
+
+            if (! $article) {
+                abort(404);
+            }
+
+            $this->data['article'] = $this->formatUserArticle($article, $user->name);
+        } elseif (ctype_digit((string) $id)) {
+            $this->data['article'] = collect($this->data['articles'])->firstWhere('id', (int) $id);
+
+            if (! $this->data['article']) {
+                abort(404);
+            }
+        } else {
             abort(404);
         }
 
@@ -101,9 +124,9 @@ class MainController extends Controller
 
     public function articles(PageRequest $request)
     {
-        $this->data['page_title'] = "Articles Page";
+        $this->data['page_title'] = 'Articles Page';
         $search = strtolower(trim((string) $request->query('search')));
-        $articles = collect($this->data['articles']);
+        $articles = collect($this->visibleArticles());
 
         if ($search !== '') {
             $articles = $articles->filter(function (array $article) use ($search) {
@@ -114,6 +137,46 @@ class MainController extends Controller
 
         $this->data['articles'] = $articles->values()->all();
         $this->data['search'] = $search;
+
         return view('web.articles', $this->data);
+    }
+
+    private function visibleArticles(): array
+    {
+        $user = Auth::guard('user')->user();
+
+        if (! $user) {
+            return $this->data['articles'];
+        }
+
+        $userArticles = Article::where('user_id', $user->id)
+            ->orderByDesc('created_at')
+            ->get()
+            ->map(fn (Article $article) => $this->formatUserArticle($article, $user->name))
+            ->all();
+
+        return array_merge($this->data['articles'], $userArticles);
+    }
+
+    private function formatUserArticle(Article $article, string $author): array
+    {
+        $description = (string) ($article->description ?? '');
+        $image = 'assets/images/home1.svg';
+
+        if ($article->filename && $article->getRawOriginal('directory')) {
+            $image = rtrim((string) $article->directory, '/').'/resized/'.$article->filename;
+        }
+
+        return [
+            'id' => $article->id,
+            'route_id' => 'user-'.$article->id,
+            'title' => $article->name ?: 'Untitled article',
+            'summary' => trim(strip_tags($description)),
+            'content' => $description,
+            'image' => $image,
+            'author' => $author,
+            'published_at' => $article->created_at?->format('Y-m-d') ?? '',
+            'is_user_article' => true,
+        ];
     }
 }

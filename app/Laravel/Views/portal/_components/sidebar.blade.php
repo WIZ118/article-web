@@ -78,6 +78,18 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('portal.cms.articles') }}" title="Articles"
+                        class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('portal.cms.articles*') ? 'active fw-semibold' : 'text-dark' }}"
+                        @if(request()->routeIs('portal.cms.articles*'))
+                        style="background-color: #0d6efd; color: #ffffff !important;" @endif>
+                        <svg class="flex-shrink-0" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M2 2.5A1.5 1.5 0 0 1 3.5 1h9A1.5 1.5 0 0 1 14 2.5v11a.5.5 0 0 1-.757.429L8 10.858l-5.243 3.071A.5.5 0 0 1 2 13.5zm1.5-.5a.5.5 0 0 0-.5.5v10.126l4.743-2.779a.5.5 0 0 1 .514 0L13 12.626V2.5a.5.5 0 0 0-.5-.5z" />
+                        </svg>
+                        <span class="sidebar-text">Articles</span>
+                    </a>
+                </li>
+
                 <li class="nav-header text-uppercase text-muted fw-bold small mt-3 mb-1 px-3 sidebar-text"
                     style="font-size: 0.72rem; letter-spacing: 0.05em;">
                     Account

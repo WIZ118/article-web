@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group([], function () {
+    Route::get('cms/articles', ['as' => 'cms.articles', 'uses' => 'CMS\ArticleController@index']);
+    Route::post('cms/articles', ['as' => 'cms.articles.store', 'uses' => 'CMS\ArticleController@store']);
+    Route::post('cms/articles/{id}/update', ['as' => 'cms.articles.update', 'uses' => 'CMS\ArticleController@update']);
+    Route::post('cms/articles/{id}/delete', ['as' => 'cms.articles.delete', 'uses' => 'CMS\ArticleController@destroy']);
+
     Route::get('cms/home', ['as' => 'cms.home', 'uses' => 'CMS\HomeController@index']);
     Route::post('cms/home', ['as' => 'cms.update_home', 'uses' => 'CMS\HomeController@update']);
 

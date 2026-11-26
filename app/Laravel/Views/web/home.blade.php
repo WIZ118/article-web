@@ -5,15 +5,18 @@
         <div class="container py-5">
             <div class="row align-items-center gy-5">
                 <div class="col-md-6 text-center text-md-start">
-                    <span
-                        class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill mb-3">
+                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill mb-3">
                         Editorial & Knowledge Hub
                     </span>
-                    <h1 class="display-4 fw-bold mb-3 text-dark">Welcome to Rtcl</h1>
-                    <p class="lead text-secondary mb-4">
-                        Discover well-crafted articles, practical guides, and curated insights built for curious readers.
-                        Browse featured stories, explore topics in depth, and stay connected with our growing community.
-                    </p>
+                    <h1 class="display-4 fw-bold mb-3 text-dark">{{ $home->title ?? 'Welcome to Rtcl' }}</h1>
+                    @if (!empty($home?->content))
+                        <div class="lead text-secondary mb-4">{!! $home->content !!}</div>
+                    @else
+                        <p class="lead text-secondary mb-4">
+                            Discover well-crafted articles, practical guides, and curated insights built for curious readers.
+                            Browse featured stories, explore topics in depth, and stay connected with our growing community.
+                        </p>
+                    @endif
                     <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
                         <a href="{{ route('web.articles') }}" class="btn btn-primary btn-lg px-4 shadow-sm">
                             Go to Articles
@@ -23,7 +26,6 @@
                         </a>
                     </div>
                 </div>
-
                 <div class="col-md-6 text-center">
                     <img src="{{ asset('assets/images/home1.svg') }}" alt="Home Page Graphic" class="img-fluid">
                 </div>
@@ -40,34 +42,11 @@
                 </a>
             </div>
 
-            <div class="col-md-6 text-center text-md-start">
-                <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill mb-3">
-                    Editorial & Knowledge Hub
-                </span>
-                <h1 class="display-4 fw-bold mb-3 text-dark">{{ $home->title ?? 'Welcome to Rtcl' }}</h1>
-                @if (!empty($home?->content))
-                    <div class="lead text-secondary mb-4">{!! $home->content !!}</div>
-                @else
-                    <p class="lead text-secondary mb-4">
-                        Discover well-crafted articles, practical guides, and curated insights built for curious readers.
-                        Browse featured stories, explore topics in depth, and stay connected with our growing community.
-                    </p>
-                @endif
-                <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
-                    <a href="{{ route('web.articles') }}" class="btn btn-primary btn-lg px-4 shadow-sm">
-                        Go to Articles
-                    </a>
-                    <a href="{{ route('web.about') }}" class="btn btn-outline-secondary btn-lg px-4">
-                        Learn More
-                    </a>
-                </div>
-            </div>
-
             <div class="row g-4 mt-2">
                 @foreach ($articles as $article)
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="card h-100 text-start shadow-sm border-0">
-                            <a href="{{ route('web.article', $article['id']) }}"
+                            <a href="{{ route('web.article', $article['route_id'] ?? $article['id']) }}"
                                 class="ratio ratio-4x3 bg-light overflow-hidden rounded-top">
                                 <img src="{{ asset($article['image']) }}" class="w-100 h-100 object-fit-cover"
                                     alt="{{ $article['title'] }}">
@@ -81,7 +60,7 @@
                                 <p class="card-text text-secondary small mb-3 flex-grow-1">
                                     {{ Str::limit($article['summary'], 110) }}
                                 </p>
-                                <a href="{{ route('web.article', $article['id']) }}"
+                                <a href="{{ route('web.article', $article['route_id'] ?? $article['id']) }}"
                                     class="btn btn-sm btn-outline-primary w-100 mt-auto">
                                     Read Article
                                 </a>

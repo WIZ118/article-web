@@ -11,14 +11,14 @@ Route::group([
     'middleware' => ["web"]
 ], function () {
 
-    include_once app_path("Laravel/Routes/Portal/Auth.php");
+    include app_path("Laravel/Routes/Portal/Auth.php");
 
     Route::group(['middleware' => "portal.auth"], function () {
         Route::get('/', ['as' => 'dashboard', 'uses' => 'MainController@index']);
 
         Route::post('logout', ['as' => 'logout', 'uses' => 'AuthenticationController@logout']);
 
-        include_once app_path("Laravel/Routes/Portal/CMS.php");
-        include_once app_path("Laravel/Routes/Portal/Profile.php");
+        include app_path("Laravel/Routes/Portal/CMS.php");
+        include app_path("Laravel/Routes/Portal/Profile.php");
     });
 });

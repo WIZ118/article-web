@@ -6,10 +6,14 @@
             <div class="text-center mx-auto mb-5" style="max-width: 640px;">
                 <p class="text-uppercase text-primary fw-semibold small mb-1" style="letter-spacing: 0.05em;">Get In Touch
                 </p>
-                <h1 class="display-5 fw-bold mb-2 text-dark">{{ $contact['heading'] ?? 'Contact us' }}</h1>
-                <p class="text-secondary mb-0">
-                    {{ $contact['closing_note'] ?? 'Have questions or feedback about Rtcl? Send us a message and our team will respond shortly.' }}
-                </p>
+                <h1 class="display-5 fw-bold mb-2 text-dark">{{ $contact->title ?? 'Contact us' }}</h1>
+                @if (!empty($contact?->content))
+                    <div class="text-secondary mb-0">{!! $contact->content !!}</div>
+                @else
+                    <p class="text-secondary mb-0">
+                        Have questions or feedback about Rtcl? Send us a message and our team will respond shortly.
+                    </p>
+                @endif
             </div>
 
             <div class="row g-4 align-items-stretch">
@@ -74,8 +78,7 @@
                                 <div>
                                     <small class="text-uppercase text-secondary fw-bold d-block"
                                         style="font-size: 0.7rem; letter-spacing: 0.05em;">Email</small>
-                                    <span class="fw-semibold text-dark small text-break">{{ $contact['support_email'] ??
-                                        'contact@rtcl.example.com' }}</span>
+                                    <span class="fw-semibold text-dark small text-break">contact@rtcl.example.com</span>
                                 </div>
                             </div>
 
@@ -89,8 +92,7 @@
                                 <div>
                                     <small class="text-uppercase text-secondary fw-bold d-block"
                                         style="font-size: 0.7rem; letter-spacing: 0.05em;">Phone</small>
-                                    <span
-                                        class="fw-semibold text-dark small">{{ $contact['phone_number'] ?? '+63 900 000 0000' }}</span>
+                                    <span class="fw-semibold text-dark small">+63 900 000 0000</span>
                                 </div>
                             </div>
 
@@ -104,8 +106,7 @@
                                 <div>
                                     <small class="text-uppercase text-secondary fw-bold d-block"
                                         style="font-size: 0.7rem; letter-spacing: 0.05em;">Office</small>
-                                    <span
-                                        class="fw-semibold text-dark small">{{ $contact['office_address'] ?? 'Olongapo City' }}</span>
+                                    <span class="fw-semibold text-dark small">Olongapo City</span>
                                 </div>
                             </div>
                         </div>

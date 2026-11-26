@@ -7,7 +7,7 @@
                 <div class="card-body p-4 p-md-5">
                     <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
                         <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-1">
-                            Featured Article
+                            {{ !empty($article['is_user_article']) ? 'Your Article' : 'Featured Article' }}
                         </span>
                         <span class="text-muted small">5 min read</span>
                     </div>
@@ -40,41 +40,45 @@
                     </div>
 
                     <div class="text-secondary fs-6" style="line-height: 1.85;">
-                        @if (!empty($article['summary']))
-                            <p class="lead text-dark fw-normal mb-4">
-                                {{ $article['summary'] }}
+                        @if (!empty($article['is_user_article']))
+                            <div>{!! $article['content'] !!}</div>
+                        @else
+                            @if (!empty($article['summary']))
+                                <p class="lead text-dark fw-normal mb-4">
+                                    {{ $article['summary'] }}
+                                </p>
+                            @endif
+
+                            @if (!empty($article['content']))
+                                <p class="mb-4">{{ $article['content'] }}</p>
+                            @endif
+
+                            <p class="mb-4">
+                                Digital publishing works best when ideas are presented with clarity, structure, and visual
+                                balance. Across modern editorial platforms, readers increasingly look for well-organized
+                                articles that break down complex subjects into digestible sections without sacrificing depth.
+                            </p>
+
+                            <h4 class="fw-bold text-dark mt-4 mb-3">Why Structured Content Matters</h4>
+                            <p class="mb-4">
+                                When articles follow a consistent layout—pairing descriptive headings, focused paragraphs, and
+                                clear visual hierarchy—readers can scan key takeaways effortlessly and return to reference
+                                details whenever needed. This approach benefits both casual visitors and regular subscribers.
+                            </p>
+
+                            <blockquote class="border-start border-4 border-primary ps-3 py-2 my-4 bg-light rounded-end">
+                                <p class="mb-0 fst-italic text-dark">
+                                    "Great editorial design removes friction between the writer's insight and the reader's
+                                    understanding."
+                                </p>
+                            </blockquote>
+
+                            <h4 class="fw-bold text-dark mt-4 mb-3">Looking Ahead</h4>
+                            <p class="mb-0">
+                                As Rtcl continues to grow, contributors and editors can collaborate seamlessly to publish
+                                timely stories, practical guides, and curated insights tailored to an engaged readership.
                             </p>
                         @endif
-
-                        @if (!empty($article['content']))
-                            <p class="mb-4">{{ $article['content'] }}</p>
-                        @endif
-
-                        <p class="mb-4">
-                            Digital publishing works best when ideas are presented with clarity, structure, and visual
-                            balance. Across modern editorial platforms, readers increasingly look for well-organized
-                            articles that break down complex subjects into digestible sections without sacrificing depth.
-                        </p>
-
-                        <h4 class="fw-bold text-dark mt-4 mb-3">Why Structured Content Matters</h4>
-                        <p class="mb-4">
-                            When articles follow a consistent layout—pairing descriptive headings, focused paragraphs, and
-                            clear visual hierarchy—readers can scan key takeaways effortlessly and return to reference
-                            details whenever needed. This approach benefits both casual visitors and regular subscribers.
-                        </p>
-
-                        <blockquote class="border-start border-4 border-primary ps-3 py-2 my-4 bg-light rounded-end">
-                            <p class="mb-0 fst-italic text-dark">
-                                "Great editorial design removes friction between the writer's insight and the reader's
-                                understanding."
-                            </p>
-                        </blockquote>
-
-                        <h4 class="fw-bold text-dark mt-4 mb-3">Looking Ahead</h4>
-                        <p class="mb-0">
-                            As Rtcl continues to grow, contributors and editors can collaborate seamlessly to publish
-                            timely stories, practical guides, and curated insights tailored to an engaged readership.
-                        </p>
                     </div>
 
                     <div

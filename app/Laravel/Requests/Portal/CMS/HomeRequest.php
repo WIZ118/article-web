@@ -4,7 +4,7 @@ namespace App\Laravel\Requests\Portal\CMS;
 
 use App\Laravel\Requests\RequestManager;
 
-class CMSHomeRequest extends RequestManager
+class HomeRequest extends RequestManager
 {
     public function rules()
     {

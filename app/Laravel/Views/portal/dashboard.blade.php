@@ -42,7 +42,7 @@
                                 <div class="col-sm-4 p-4 border-bottom border-sm-bottom-0 border-sm-end">
                                     <span class="text-uppercase text-secondary fw-semibold d-block mb-1"
                                         style="font-size: 0.72rem; letter-spacing: 0.05em;">
-                                        Published Articles
+                                        My Articles
                                     </span>
                                     <div
                                         class="d-flex align-items-baseline justify-content-center justify-content-sm-start gap-2">
@@ -124,7 +124,7 @@
                                 <div
                                     class="card-header bg-white border-bottom py-3 px-3 px-md-4 d-flex justify-content-between align-items-center">
                                     <h2 class="h6 fw-bold text-dark mb-0">Recent Articles</h2>
-                                    <a href="{{ route('web.articles') }}" target="_blank"
+                                    <a href="{{ route('portal.cms.articles') }}"
                                         class="btn btn-sm btn-outline-primary">
                                         + New Article
                                     </a>
@@ -132,7 +132,7 @@
 
                                 <div class="list-group list-group-flush">
                                     @foreach ($recent_articles as $article)
-                                        <a href="{{ route($article['route']) }}" target="_blank"
+                                        <a href="{{ $article['url'] }}" target="_blank"
                                             class="list-group-item list-group-item-action px-3 px-md-4 py-3 {{ $loop->last ? 'border-bottom-0' : '' }} d-flex align-items-center justify-content-between gap-3">
                                             <div class="d-flex align-items-center gap-3">
                                                 <img src="{{ asset($article['image']) }}" alt="{{ $article['title'] }}"
@@ -169,13 +169,13 @@
                                     </div>
 
                                     <div class="d-flex flex-column gap-2">
-                                        <a href="{{ route('web.articles') }}" target="_blank"
+                                        <a href="{{ route('portal.cms.articles') }}"
                                             class="p-3 rounded-3 text-decoration-none d-flex justify-content-between align-items-center border"
                                             style="background-color: aliceblue;">
                                             <div>
-                                                <div class="fw-semibold text-dark small">Browse Public Articles</div>
-                                                <div class="text-secondary" style="font-size: 0.78rem;">Inspect all
-                                                    {{ $stats['published_articles'] }} live posts on Rtcl
+                                                <div class="fw-semibold text-dark small">Manage Your Articles</div>
+                                                <div class="text-secondary" style="font-size: 0.78rem;">Edit your
+                                                    {{ $stats['published_articles'] }} saved posts
                                                 </div>
                                             </div>
                                             <span

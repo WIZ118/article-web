@@ -1,3 +1,3 @@
 <?php
 
-include_once app_path('Laravel/Routes/Api.php');
+include app_path('Laravel/Routes/Api.php');

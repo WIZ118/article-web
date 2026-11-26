@@ -17,7 +17,7 @@
                 @forelse ($articles as $article)
                     <div class="col-12 col-sm-6 col-lg-4">
                         <div class="card h-100 text-start shadow-sm border-0">
-                            <a href="{{ route('web.article', $article['id']) }}"
+                            <a href="{{ route('web.article', $article['route_id'] ?? $article['id']) }}"
                                 class="ratio ratio-4x3 bg-light overflow-hidden rounded-top">
                                 <img src="{{ asset($article['image']) }}" class="w-100 h-100 object-fit-cover"
                                     alt="{{ $article['title'] }}">
@@ -31,7 +31,7 @@
                                 <p class="card-text text-secondary small mb-4 flex-grow-1">
                                     {{ Str::limit($article['summary'], 125) }}
                                 </p>
-                                <a href="{{ route('web.article', $article['id']) }}" class="btn btn-primary w-100 mt-auto">
+                                <a href="{{ route('web.article', $article['route_id'] ?? $article['id']) }}" class="btn btn-primary w-100 mt-auto">
                                     Go to article
                                 </a>
                             </div>

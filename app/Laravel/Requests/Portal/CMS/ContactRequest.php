@@ -4,7 +4,7 @@ namespace App\Laravel\Requests\Portal\CMS;
 
 use App\Laravel\Requests\RequestManager;
 
-class CMSAboutRequest extends RequestManager
+class ContactRequest extends RequestManager
 {
     public function rules()
     {

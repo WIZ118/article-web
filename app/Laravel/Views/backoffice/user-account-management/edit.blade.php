@@ -5,11 +5,11 @@
         <div class="container" style="max-width: 860px;">
             <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
                 <div>
-                    <p class="text-uppercase text-primary fw-semibold small mb-1" style="letter-spacing: 0.05em;">
+                    <p class="text-uppercase text-success fw-semibold small mb-1" style="letter-spacing: 0.05em;">
                         User Account Management
                     </p>
                     <h1 class="h3 fw-bold text-dark mb-1">Edit User Account</h1>
-                    <p class="text-secondary mb-0">Update portal user details or set a new password.</p>
+                    <p class="text-secondary mb-0">Update portal user details or manage account credentials.</p>
                 </div>
 
                 <a href="{{ route('backoffice.user_account_management.index') }}"
@@ -23,15 +23,27 @@
             </div>
 
             <div class="card shadow-sm border-0 overflow-hidden">
-                <div class="card-header bg-white py-3 px-4 border-bottom d-flex align-items-center gap-3">
-                    <div class="rounded-circle bg-success-subtle text-success fw-bold d-flex align-items-center justify-content-center flex-shrink-0"
-                        style="width: 42px; height: 42px;">
-                        {{ strtoupper(substr($record->name ?? 'U', 0, 1)) }}
+                <div
+                    class="card-header bg-white py-3 px-4 border-bottom d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
+                    <div class="d-flex align-items-center gap-3 min-w-0">
+                        <div class="rounded-circle bg-success-subtle text-success fw-bold d-flex align-items-center justify-content-center flex-shrink-0"
+                            style="width: 42px; height: 42px;">
+                            {{ strtoupper(substr($record->name ?? 'U', 0, 1)) }}
+                        </div>
+                        <div class="min-w-0">
+                            <div class="fw-bold text-dark text-truncate">{{ $record->name }}</div>
+                            <div class="text-muted small text-truncate">{{ $record->email }}</div>
+                        </div>
                     </div>
-                    <div class="min-w-0">
-                        <div class="fw-bold text-dark text-truncate">{{ $record->name }}</div>
-                        <div class="text-muted small text-truncate">{{ $record->email }}</div>
-                    </div>
+
+                    <a href="{{ route('backoffice.user_account_management.password', $record->id) }}"
+                        class="btn btn-sm btn-outline-warning d-inline-flex align-items-center justify-content-center gap-1 flex-shrink-0">
+                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                            <path
+                                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2" />
+                        </svg>
+                        <span>Change Password</span>
+                    </a>
                 </div>
 
                 <form action="{{ route('backoffice.user_account_management.update', $record->id) }}" method="POST">
@@ -58,36 +70,6 @@
                                 @if ($errors->first('email'))
                                     <div class="text-danger small mt-1">{{ $errors->first('email') }}</div>
                                 @endif
-                            </div>
-                        </div>
-
-                        <hr class="my-4">
-
-                        <div class="mb-3">
-                            <h6 class="fw-bold text-dark mb-1">Change Password</h6>
-                            <p class="text-muted small mb-0">Leave both fields blank if you do not want to change the
-                                current password.</p>
-                        </div>
-
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="password" class="form-label fw-semibold text-secondary small text-uppercase">
-                                    New Password
-                                </label>
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    id="password" name="password" placeholder="Enter new password">
-                                @if ($errors->first('password'))
-                                    <div class="text-danger small mt-1">{{ $errors->first('password') }}</div>
-                                @endif
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="password_confirmation"
-                                    class="form-label fw-semibold text-secondary small text-uppercase">
-                                    Confirm Password
-                                </label>
-                                <input type="password" class="form-control" id="password_confirmation"
-                                    name="password_confirmation" placeholder="Repeat new password">
                             </div>
                         </div>
                     </div>

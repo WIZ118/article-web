@@ -14,19 +14,31 @@ class CMS extends Model
         'content',
     ];
 
-    public static function home(): ?CMSHome
+    public static function home(?int $userId = null): ?CMSHome
     {
-        return (new CMSHome())->newQuery()->first();
+        if ($userId === null) {
+            return null;
+        }
+
+        return (new CMSHome)->newQuery()->where('user_id', $userId)->first();
     }
 
-    public static function about(): ?CMSAbout
+    public static function about(?int $userId = null): ?CMSAbout
     {
-        return (new CMSAbout())->newQuery()->first();
+        if ($userId === null) {
+            return null;
+        }
+
+        return (new CMSAbout)->newQuery()->where('user_id', $userId)->first();
     }
 
-    public static function contact(): ?CMSContact
+    public static function contact(?int $userId = null): ?CMSContact
     {
-        return (new CMSContact())->newQuery()->first();
+        if ($userId === null) {
+            return null;
+        }
+
+        return (new CMSContact)->newQuery()->where('user_id', $userId)->first();
     }
 }
 
