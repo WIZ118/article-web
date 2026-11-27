@@ -30,11 +30,12 @@
                     </div>
                     <div class="mb-3">
                         <label for="new-description" class="form-label fw-semibold">Article content</label>
-                        <textarea id="new-description" name="description" rows="5" required
+                        <textarea id="new-description" name="description" rows="5"
                             class="form-control article-editor @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                         @error('description')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
+                        <div id="new-description-error" class="invalid-feedback">Article content is required.</div>
                     </div>
                     <div class="mb-3">
                         <label for="new-image" class="form-label fw-semibold">Image</label>
@@ -73,8 +74,11 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="description-{{ $article->id }}" class="form-label fw-semibold">Article content</label>
-                                    <textarea id="description-{{ $article->id }}" name="description" rows="5" required
+                                    <textarea id="description-{{ $article->id }}" name="description" rows="5"
                                         class="form-control article-editor">{{ $article->description }}</textarea>
+                                    <div id="description-{{ $article->id }}-error" class="invalid-feedback">
+                                        Article content is required.
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="image-{{ $article->id }}" class="form-label fw-semibold">Replace image (optional)</label>
@@ -124,15 +128,41 @@
             ]
         };
 
+        function hasArticleContent(data) {
+            return data
+                .replace(/<[^>]*>/g, '')
+                .replace(/&nbsp;|&#160;/gi, ' ')
+                .trim().length > 0;
+        }
+
         document.querySelectorAll('.article-editor').forEach(textarea => {
             const form = textarea.closest('form');
+            const feedback = document.getElementById(`${textarea.id}-error`);
+            let submitAttempted = false;
 
             ClassicEditor.create(textarea, {
                 toolbar: articleEditorToolbar,
                 heading: articleEditorHeading
             }).then(editor => {
-                form.addEventListener('submit', () => {
+                const syncArticleContent = () => {
                     textarea.value = editor.getData();
+
+                    if (submitAttempted) {
+                        const hasContent = hasArticleContent(textarea.value);
+                        feedback.classList.toggle('d-block', !hasContent);
+                    }
+                };
+
+                editor.model.document.on('change:data', syncArticleContent);
+                form.addEventListener('submit', event => {
+                    syncArticleContent();
+                    submitAttempted = true;
+
+                    if (!hasArticleContent(textarea.value)) {
+                        event.preventDefault();
+                        feedback.classList.add('d-block');
+                        editor.editing.view.focus();
+                    }
                 });
             }).catch(error => console.error(error));
         });

@@ -5,7 +5,8 @@
         <div class="container py-5">
             <div class="row align-items-center gy-5">
                 <div class="col-md-6 text-center text-md-start">
-                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill mb-3">
+                    <span
+                        class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill mb-3">
                         Editorial & Knowledge Hub
                     </span>
                     <h1 class="display-4 fw-bold mb-3 text-dark">{{ $home->title ?? 'Welcome to Rtcl' }}</h1>
@@ -48,8 +49,8 @@
                         <div class="card h-100 text-start shadow-sm border-0">
                             <a href="{{ route('web.article', $article['route_id'] ?? $article['id']) }}"
                                 class="ratio ratio-4x3 bg-light overflow-hidden rounded-top">
-                                <img src="{{ asset($article['image']) }}" class="w-100 h-100 object-fit-cover"
-                                    alt="{{ $article['title'] }}">
+                                <img src="{{ asset(!empty($article['image']) ? $article['image'] : 'assets/images/home1.svg') }}"
+                                    class="w-100 h-100 object-fit-cover" alt="{{ $article['title'] }}">
                             </a>
                             <div class="card-body d-flex flex-column">
                                 <div class="d-flex align-items-center justify-content-between text-muted small mb-2">
