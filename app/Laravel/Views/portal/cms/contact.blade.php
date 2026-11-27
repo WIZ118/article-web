@@ -8,7 +8,7 @@
                     Content Management
                 </p>
                 <h1 class="h3 fw-bold text-dark mb-1">Edit Contact Page</h1>
-                <p class="text-secondary mb-0">Manage the heading and main content displayed on the public contact page.</p>
+                <p class="text-secondary mb-0">Manage the Contact page text and contact details. The message form and its behavior stay unchanged.</p>
             </div>
 
             <div class="d-flex gap-2">
@@ -49,6 +49,87 @@
                         @if ($errors->first('content'))
                             <div class="text-danger small mt-1">{{ $errors->first('content') }}</div>
                         @endif
+                    </div>
+
+                    <h2 class="h6 fw-bold text-dark border-bottom pb-2 mt-4 mb-3">Contact Information</h2>
+                    <div class="mb-4">
+                        <label for="section_label" class="form-label fw-semibold text-secondary small text-uppercase">
+                            Section Label
+                        </label>
+                        <input type="text" class="form-control @error('section_label') is-invalid @enderror"
+                            id="section_label" name="section_label"
+                            value="{{ old('section_label', $record->section_label ?? 'Get In Touch') }}">
+                        @error('section_label')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label for="email" class="form-label fw-semibold text-secondary small text-uppercase">
+                                Contact Email
+                            </label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
+                                name="email" value="{{ old('email', $record->email ?? 'contact@rtcl.example.com') }}">
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="phone" class="form-label fw-semibold text-secondary small text-uppercase">
+                                Phone Number
+                            </label>
+                            <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone"
+                                name="phone" value="{{ old('phone', $record->phone ?? '+63 900 000 0000') }}">
+                            @error('phone')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="office" class="form-label fw-semibold text-secondary small text-uppercase">
+                            Office Location
+                        </label>
+                        <input type="text" class="form-control @error('office') is-invalid @enderror" id="office"
+                            name="office" value="{{ old('office', $record->office ?? 'Olongapo City') }}">
+                        @error('office')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <h2 class="h6 fw-bold text-dark border-bottom pb-2 mt-2 mb-3">Support Hours</h2>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <label for="support_badge" class="form-label fw-semibold text-secondary small text-uppercase">
+                                Support Label
+                            </label>
+                            <input type="text" class="form-control @error('support_badge') is-invalid @enderror"
+                                id="support_badge" name="support_badge"
+                                value="{{ old('support_badge', $record->support_badge ?? 'Support Hours') }}">
+                            @error('support_badge')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <label for="support_title" class="form-label fw-semibold text-secondary small text-uppercase">
+                                Support Hours Heading
+                            </label>
+                            <input type="text" class="form-control @error('support_title') is-invalid @enderror"
+                                id="support_title" name="support_title"
+                                value="{{ old('support_title', $record->support_title ?? 'Monday to Friday') }}">
+                            @error('support_title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <label for="support_content" class="form-label fw-semibold text-secondary small text-uppercase">
+                            Support Hours Details
+                        </label>
+                        <textarea class="form-control @error('support_content') is-invalid @enderror" id="support_content"
+                            name="support_content" rows="3">{{ old('support_content', $record->support_content ?? '8:00 AM to 5:00 PM (PHT). Inquiries submitted outside office hours are answered the next business day.') }}</textarea>
+                        @error('support_content')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 

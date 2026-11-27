@@ -9,7 +9,8 @@
                 </div>
 
                 <div class="col-md-6 text-center text-md-start order-md-2">
-                    <p class="text-uppercase text-primary fw-semibold small mb-1" style="letter-spacing: 0.05em;">Who We Are
+                    <p class="text-uppercase text-primary fw-semibold small mb-1" style="letter-spacing: 0.05em;">
+                        {{ $about?->section_label ?: 'Who We Are' }}
                     </p>
                     <h1 class="display-4 fw-bold mb-3 text-dark">{{ $about->title ?? 'About Rtcl' }}</h1>
                     @if (!empty($about?->content))
@@ -22,7 +23,7 @@
                     @endif
                     <div>
                         <a href="{{ route('web.contact') }}" class="btn btn-primary btn-lg px-4 shadow-sm">
-                            Contact us
+                            {{ $about?->contact_button_label ?: 'Contact us' }}
                         </a>
                     </div>
                 </div>
@@ -32,10 +33,11 @@
                 <div class="col-md-6">
                     <div class="card h-100 border-0 shadow-sm text-start">
                         <div class="card-body p-4 d-flex flex-column">
-                            <h3 class="card-title fw-bold text-dark mb-3">Our Mission</h3>
+                            <h3 class="card-title fw-bold text-dark mb-3">
+                                {{ $about?->mission_title ?: 'Our Mission' }}
+                            </h3>
                             <p class="card-text text-secondary flex-grow-1 mb-0">
-                                To empower writers, editors, and administrators with an intuitive, structured workspace
-                                that makes publishing clear, reliable, and accessible to every reader.
+                                {{ $about?->mission_content ?: 'To empower writers, editors, and administrators with an intuitive, structured workspace that makes publishing clear, reliable, and accessible to every reader.' }}
                             </p>
                         </div>
                     </div>
@@ -44,10 +46,11 @@
                 <div class="col-md-6">
                     <div class="card h-100 border-0 shadow-sm text-start">
                         <div class="card-body p-4 d-flex flex-column">
-                            <h3 class="card-title fw-bold text-dark mb-3">Our Vision</h3>
+                            <h3 class="card-title fw-bold text-dark mb-3">
+                                {{ $about?->vision_title ?: 'Our Vision' }}
+                            </h3>
                             <p class="card-text text-secondary flex-grow-1 mb-0">
-                                To serve as a trusted digital hub where well-organized articles and seamless content
-                                governance foster continuous learning and informed communities.
+                                {{ $about?->vision_content ?: 'To serve as a trusted digital hub where well-organized articles and seamless content governance foster continuous learning and informed communities.' }}
                             </p>
                         </div>
                     </div>

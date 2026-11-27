@@ -4,7 +4,8 @@
     <main class="flex-fill d-flex align-items-center justify-content-center py-5">
         <div class="container" style="max-width: 980px;">
             <div class="text-center mx-auto mb-5" style="max-width: 640px;">
-                <p class="text-uppercase text-primary fw-semibold small mb-1" style="letter-spacing: 0.05em;">Get In Touch
+                <p class="text-uppercase text-primary fw-semibold small mb-1" style="letter-spacing: 0.05em;">
+                    {{ $contact?->section_label ?: 'Get In Touch' }}
                 </p>
                 <h1 class="display-5 fw-bold mb-2 text-dark">{{ $contact->title ?? 'Contact us' }}</h1>
                 @if (!empty($contact?->content))
@@ -78,7 +79,9 @@
                                 <div>
                                     <small class="text-uppercase text-secondary fw-bold d-block"
                                         style="font-size: 0.7rem; letter-spacing: 0.05em;">Email</small>
-                                    <span class="fw-semibold text-dark small text-break">contact@rtcl.example.com</span>
+                                    <span class="fw-semibold text-dark small text-break">
+                                        {{ $contact?->email ?: 'contact@rtcl.example.com' }}
+                                    </span>
                                 </div>
                             </div>
 
@@ -92,7 +95,9 @@
                                 <div>
                                     <small class="text-uppercase text-secondary fw-bold d-block"
                                         style="font-size: 0.7rem; letter-spacing: 0.05em;">Phone</small>
-                                    <span class="fw-semibold text-dark small">+63 900 000 0000</span>
+                                    <span class="fw-semibold text-dark small">
+                                        {{ $contact?->phone ?: '+63 900 000 0000' }}
+                                    </span>
                                 </div>
                             </div>
 
@@ -106,7 +111,9 @@
                                 <div>
                                     <small class="text-uppercase text-secondary fw-bold d-block"
                                         style="font-size: 0.7rem; letter-spacing: 0.05em;">Office</small>
-                                    <span class="fw-semibold text-dark small">Olongapo City</span>
+                                    <span class="fw-semibold text-dark small">
+                                        {{ $contact?->office ?: 'Olongapo City' }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -116,12 +123,13 @@
                         <div class="card-body p-4 d-flex flex-column justify-content-center">
                             <span
                                 class="badge bg-success-subtle text-success border border-success-subtle align-self-start mb-2">
-                                Support Hours
+                                {{ $contact?->support_badge ?: 'Support Hours' }}
                             </span>
-                            <h6 class="fw-bold text-dark mb-1">Monday to Friday</h6>
+                            <h6 class="fw-bold text-dark mb-1">
+                                {{ $contact?->support_title ?: 'Monday to Friday' }}
+                            </h6>
                             <p class="text-secondary small mb-0">
-                                8:00 AM to 5:00 PM (PHT). Inquiries submitted outside office hours are answered the next
-                                business day.
+                                {{ $contact?->support_content ?: '8:00 AM to 5:00 PM (PHT). Inquiries submitted outside office hours are answered the next business day.' }}
                             </p>
                         </div>
                     </div>

@@ -32,6 +32,12 @@ class HomeController extends Controller
             $home->user_id = $userId;
             $home->title = $request->input('title');
             $home->content = $request->input('content');
+            $home->badge_text = $request->input('badge_text');
+            $home->primary_button_label = $request->input('primary_button_label');
+            $home->secondary_button_label = $request->input('secondary_button_label');
+            $home->featured_label = $request->input('featured_label');
+            $home->featured_title = $request->input('featured_title');
+            $home->featured_link_label = $request->input('featured_link_label');
             $home->save();
 
             DB::commit();

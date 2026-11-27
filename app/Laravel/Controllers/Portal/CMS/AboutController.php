@@ -32,6 +32,12 @@ class AboutController extends Controller
             $about->user_id = $userId;
             $about->title = $request->input('title');
             $about->content = $request->input('content');
+            $about->section_label = $request->input('section_label');
+            $about->mission_title = $request->input('mission_title');
+            $about->mission_content = $request->input('mission_content');
+            $about->vision_title = $request->input('vision_title');
+            $about->vision_content = $request->input('vision_content');
+            $about->contact_button_label = $request->input('contact_button_label');
             $about->save();
 
             DB::commit();

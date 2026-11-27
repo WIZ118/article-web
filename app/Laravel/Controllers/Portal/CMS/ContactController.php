@@ -32,6 +32,13 @@ class ContactController extends Controller
             $contact->user_id = $userId;
             $contact->title = $request->input('title');
             $contact->content = $request->input('content');
+            $contact->section_label = $request->input('section_label');
+            $contact->email = $request->input('email');
+            $contact->phone = $request->input('phone');
+            $contact->office = $request->input('office');
+            $contact->support_badge = $request->input('support_badge');
+            $contact->support_title = $request->input('support_title');
+            $contact->support_content = $request->input('support_content');
             $contact->save();
 
             DB::commit();

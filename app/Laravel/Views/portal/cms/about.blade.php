@@ -8,7 +8,7 @@
                     Content Management
                 </p>
                 <h1 class="h3 fw-bold text-dark mb-1">Edit About Page</h1>
-                <p class="text-secondary mb-0">Manage the heading and main content displayed on the public about page.</p>
+                <p class="text-secondary mb-0">Manage the About page text and contact button label. The image and button destination stay fixed.</p>
             </div>
 
             <div class="d-flex gap-2">
@@ -38,6 +38,18 @@
                         @endif
                     </div>
 
+                    <div class="mb-4">
+                        <label for="section_label" class="form-label fw-semibold text-secondary small text-uppercase">
+                            Section Label
+                        </label>
+                        <input type="text" class="form-control @error('section_label') is-invalid @enderror"
+                            id="section_label" name="section_label"
+                            value="{{ old('section_label', $record->section_label ?? 'Who We Are') }}">
+                        @error('section_label')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="mb-2">
                         <label for="content" class="form-label fw-semibold text-secondary small text-uppercase">
                             Page Content
@@ -49,6 +61,61 @@
                         @if ($errors->first('content'))
                             <div class="text-danger small mt-1">{{ $errors->first('content') }}</div>
                         @endif
+                    </div>
+
+                    <h2 class="h6 fw-bold text-dark border-bottom pb-2 mt-4 mb-3">Mission and Vision</h2>
+                    <div class="mb-4">
+                        <label for="mission_title" class="form-label fw-semibold text-secondary small text-uppercase">
+                            Mission Heading
+                        </label>
+                        <input type="text" class="form-control @error('mission_title') is-invalid @enderror"
+                            id="mission_title" name="mission_title"
+                            value="{{ old('mission_title', $record->mission_title ?? 'Our Mission') }}">
+                        @error('mission_title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-4">
+                        <label for="mission_content" class="form-label fw-semibold text-secondary small text-uppercase">
+                            Mission Text
+                        </label>
+                        <textarea class="form-control @error('mission_content') is-invalid @enderror" id="mission_content"
+                            name="mission_content" rows="3">{{ old('mission_content', $record->mission_content ?? 'To empower writers, editors, and administrators with an intuitive, structured workspace that makes publishing clear, reliable, and accessible to every reader.') }}</textarea>
+                        @error('mission_content')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-4">
+                        <label for="vision_title" class="form-label fw-semibold text-secondary small text-uppercase">
+                            Vision Heading
+                        </label>
+                        <input type="text" class="form-control @error('vision_title') is-invalid @enderror"
+                            id="vision_title" name="vision_title"
+                            value="{{ old('vision_title', $record->vision_title ?? 'Our Vision') }}">
+                        @error('vision_title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-4">
+                        <label for="vision_content" class="form-label fw-semibold text-secondary small text-uppercase">
+                            Vision Text
+                        </label>
+                        <textarea class="form-control @error('vision_content') is-invalid @enderror" id="vision_content"
+                            name="vision_content" rows="3">{{ old('vision_content', $record->vision_content ?? 'To serve as a trusted digital hub where well-organized articles and seamless content governance foster continuous learning and informed communities.') }}</textarea>
+                        @error('vision_content')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-2">
+                        <label for="contact_button_label" class="form-label fw-semibold text-secondary small text-uppercase">
+                            Contact Button Label
+                        </label>
+                        <input type="text" class="form-control @error('contact_button_label') is-invalid @enderror"
+                            id="contact_button_label" name="contact_button_label"
+                            value="{{ old('contact_button_label', $record->contact_button_label ?? 'Contact us') }}">
+                        @error('contact_button_label')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 

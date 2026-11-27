@@ -12,6 +12,24 @@ class CMS extends Model
     protected $fillable = [
         'title',
         'content',
+        'badge_text',
+        'primary_button_label',
+        'secondary_button_label',
+        'featured_label',
+        'featured_title',
+        'featured_link_label',
+        'section_label',
+        'mission_title',
+        'mission_content',
+        'vision_title',
+        'vision_content',
+        'contact_button_label',
+        'email',
+        'phone',
+        'office',
+        'support_badge',
+        'support_title',
+        'support_content',
     ];
 
     public static function home(?int $userId = null): ?CMSHome

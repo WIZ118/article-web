@@ -7,7 +7,7 @@
                 <div class="col-md-6 text-center text-md-start">
                     <span
                         class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill mb-3">
-                        Editorial & Knowledge Hub
+                        {{ $home?->badge_text ?: 'Editorial & Knowledge Hub' }}
                     </span>
                     <h1 class="display-4 fw-bold mb-3 text-dark">{{ $home->title ?? 'Welcome to Rtcl' }}</h1>
                     @if (!empty($home?->content))
@@ -20,10 +20,10 @@
                     @endif
                     <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
                         <a href="{{ route('web.articles') }}" class="btn btn-primary btn-lg px-4 shadow-sm">
-                            Go to Articles
+                            {{ $home?->primary_button_label ?: 'Go to Articles' }}
                         </a>
                         <a href="{{ route('web.about') }}" class="btn btn-outline-secondary btn-lg px-4">
-                            Learn More
+                            {{ $home?->secondary_button_label ?: 'Learn More' }}
                         </a>
                     </div>
                 </div>
@@ -34,12 +34,15 @@
 
             <div class="d-flex justify-content-between align-items-end mt-5 pt-3 border-top">
                 <div>
-                    <p class="text-uppercase text-primary fw-semibold small mb-1" style="letter-spacing: 0.05em;">Featured
+                    <p class="text-uppercase text-primary fw-semibold small mb-1" style="letter-spacing: 0.05em;">
+                        {{ $home?->featured_label ?: 'Featured' }}
                     </p>
-                    <h2 class="h4 fw-bold text-dark mb-0">Latest Articles</h2>
+                    <h2 class="h4 fw-bold text-dark mb-0">
+                        {{ $home?->featured_title ?: 'Latest Articles' }}
+                    </h2>
                 </div>
                 <a href="{{ route('web.articles') }}" class="text-decoration-none fw-semibold small">
-                    View all articles &rarr;
+                    {{ $home?->featured_link_label ?: 'View all articles' }} &rarr;
                 </a>
             </div>
 
