@@ -36,9 +36,14 @@
                             <h3 class="card-title fw-bold text-dark mb-3">
                                 {{ $about?->mission_title ?: 'Our Mission' }}
                             </h3>
-                            <p class="card-text text-secondary flex-grow-1 mb-0">
-                                {{ $about?->mission_content ?: 'To empower writers, editors, and administrators with an intuitive, structured workspace that makes publishing clear, reliable, and accessible to every reader.' }}
-                            </p>
+                            @if (!empty($about?->mission_content))
+                                <div class="card-text text-secondary flex-grow-1 mb-0">{!! $about->mission_content !!}</div>
+                            @else
+                                <p class="card-text text-secondary flex-grow-1 mb-0">
+                                    To empower writers, editors, and administrators with an intuitive, structured workspace
+                                    that makes publishing clear, reliable, and accessible to every reader.
+                                </p>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -49,9 +54,14 @@
                             <h3 class="card-title fw-bold text-dark mb-3">
                                 {{ $about?->vision_title ?: 'Our Vision' }}
                             </h3>
-                            <p class="card-text text-secondary flex-grow-1 mb-0">
-                                {{ $about?->vision_content ?: 'To serve as a trusted digital hub where well-organized articles and seamless content governance foster continuous learning and informed communities.' }}
-                            </p>
+                            @if (!empty($about?->vision_content))
+                                <div class="card-text text-secondary flex-grow-1 mb-0">{!! $about->vision_content !!}</div>
+                            @else
+                                <p class="card-text text-secondary flex-grow-1 mb-0">
+                                    To serve as a trusted digital hub where well-organized articles and seamless content
+                                    governance foster continuous learning and informed communities.
+                                </p>
+                            @endif
                         </div>
                     </div>
                 </div>

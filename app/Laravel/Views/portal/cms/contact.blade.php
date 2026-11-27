@@ -125,7 +125,7 @@
                         <label for="support_content" class="form-label fw-semibold text-secondary small text-uppercase">
                             Support Hours Details
                         </label>
-                        <textarea class="form-control @error('support_content') is-invalid @enderror" id="support_content"
+                        <textarea class="form-control editor @error('support_content') is-invalid @enderror" id="support_content"
                             name="support_content" rows="3">{{ old('support_content', $record->support_content ?? '8:00 AM to 5:00 PM (PHT). Inquiries submitted outside office hours are answered the next business day.') }}</textarea>
                         @error('support_content')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -150,9 +150,8 @@
     <script src="{{ asset('assets/libs/ckeditor5/build/ckeditor.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        let editorInstance;
-
-        ClassicEditor.create(document.querySelector('.editor'), {
+        const editorTextareas = Array.from(document.querySelectorAll('textarea.editor'));
+        const editorPromises = editorTextareas.map(textarea => ClassicEditor.create(textarea, {
             toolbar: [
                 'heading', '|',
                 'bold', 'italic', 'underline', '|',
@@ -168,9 +167,9 @@
                     { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
                 ]
             }
-        }).then(editor => {
-            editorInstance = editor;
-        }).catch(error => console.error(error));
+        }));
+        const editorsReady = Promise.all(editorPromises);
+        editorsReady.catch(error => console.error(error));
 
         document.addEventListener('DOMContentLoaded', function () {
             const submitBtn = document.querySelector('.submit-btn');
@@ -178,10 +177,6 @@
 
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
-
-                if (editorInstance) {
-                    document.querySelector('.editor').value = editorInstance.getData();
-                }
 
                 Swal.fire({
                     title: 'Are you sure?',
@@ -191,9 +186,22 @@
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Yes, save changes!'
-                }).then((result) => {
+                }).then(async result => {
                     if (result.isConfirmed) {
-                        form.submit();
+                        try {
+                            const editors = await editorsReady;
+                            editors.forEach((editor, index) => {
+                                editorTextareas[index].value = editor.getData();
+                            });
+                            form.submit();
+                        } catch (error) {
+                            console.error(error);
+                            Swal.fire({
+                                title: 'Editor unavailable',
+                                text: 'The content editor could not be initialized. Refresh the page and try again.',
+                                icon: 'error'
+                            });
+                        }
                     }
                 });
             });

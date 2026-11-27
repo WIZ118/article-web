@@ -17,7 +17,7 @@ class ContactRequest extends RequestManager
             'office' => 'nullable|string|max:255',
             'support_badge' => 'nullable|string|max:100',
             'support_title' => 'nullable|string|max:120',
-            'support_content' => 'nullable|string|max:1500',
+            'support_content' => 'nullable|string|max:5000',
         ];
     }
 
@@ -33,7 +33,7 @@ class ContactRequest extends RequestManager
             'office.max' => 'The office location may not be greater than 255 characters.',
             'support_badge.max' => 'The support badge may not be greater than 100 characters.',
             'support_title.max' => 'The support title may not be greater than 120 characters.',
-            'support_content.max' => 'The support content may not be greater than 1500 characters.',
+            'support_content.max' => 'The support content may not be greater than 5000 characters.',
         ];
     }
 }

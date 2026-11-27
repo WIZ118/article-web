@@ -79,7 +79,7 @@
                         <label for="mission_content" class="form-label fw-semibold text-secondary small text-uppercase">
                             Mission Text
                         </label>
-                        <textarea class="form-control @error('mission_content') is-invalid @enderror" id="mission_content"
+                        <textarea class="form-control editor @error('mission_content') is-invalid @enderror" id="mission_content"
                             name="mission_content" rows="3">{{ old('mission_content', $record->mission_content ?? 'To empower writers, editors, and administrators with an intuitive, structured workspace that makes publishing clear, reliable, and accessible to every reader.') }}</textarea>
                         @error('mission_content')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -100,7 +100,7 @@
                         <label for="vision_content" class="form-label fw-semibold text-secondary small text-uppercase">
                             Vision Text
                         </label>
-                        <textarea class="form-control @error('vision_content') is-invalid @enderror" id="vision_content"
+                        <textarea class="form-control editor @error('vision_content') is-invalid @enderror" id="vision_content"
                             name="vision_content" rows="3">{{ old('vision_content', $record->vision_content ?? 'To serve as a trusted digital hub where well-organized articles and seamless content governance foster continuous learning and informed communities.') }}</textarea>
                         @error('vision_content')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -136,9 +136,8 @@
     <script src="{{ asset('assets/libs/ckeditor5/build/ckeditor.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        let editorInstance;
-
-        ClassicEditor.create(document.querySelector('.editor'), {
+        const editorTextareas = Array.from(document.querySelectorAll('textarea.editor'));
+        const editorPromises = editorTextareas.map(textarea => ClassicEditor.create(textarea, {
             toolbar: [
                 'heading', '|',
                 'bold', 'italic', 'underline', '|',
@@ -154,9 +153,9 @@
                     { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' }
                 ]
             }
-        }).then(editor => {
-            editorInstance = editor;
-        }).catch(error => console.error(error));
+        }));
+        const editorsReady = Promise.all(editorPromises);
+        editorsReady.catch(error => console.error(error));
 
         document.addEventListener('DOMContentLoaded', function () {
             const submitBtn = document.querySelector('.submit-btn');
@@ -164,10 +163,6 @@
 
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
-
-                if (editorInstance) {
-                    document.querySelector('.editor').value = editorInstance.getData();
-                }
 
                 Swal.fire({
                     title: 'Are you sure?',
@@ -177,9 +172,22 @@
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Yes, save changes!'
-                }).then((result) => {
+                }).then(async result => {
                     if (result.isConfirmed) {
-                        form.submit();
+                        try {
+                            const editors = await editorsReady;
+                            editors.forEach((editor, index) => {
+                                editorTextareas[index].value = editor.getData();
+                            });
+                            form.submit();
+                        } catch (error) {
+                            console.error(error);
+                            Swal.fire({
+                                title: 'Editor unavailable',
+                                text: 'The content editor could not be initialized. Refresh the page and try again.',
+                                icon: 'error'
+                            });
+                        }
                     }
                 });
             });

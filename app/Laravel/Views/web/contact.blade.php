@@ -128,9 +128,14 @@
                             <h6 class="fw-bold text-dark mb-1">
                                 {{ $contact?->support_title ?: 'Monday to Friday' }}
                             </h6>
-                            <p class="text-secondary small mb-0">
-                                {{ $contact?->support_content ?: '8:00 AM to 5:00 PM (PHT). Inquiries submitted outside office hours are answered the next business day.' }}
-                            </p>
+                            @if (!empty($contact?->support_content))
+                                <div class="text-secondary small mb-0">{!! $contact->support_content !!}</div>
+                            @else
+                                <p class="text-secondary small mb-0">
+                                    8:00 AM to 5:00 PM (PHT). Inquiries submitted outside office hours are answered the next
+                                    business day.
+                                </p>
+                            @endif
                         </div>
                     </div>
                 </div>
